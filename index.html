@@ -232,7 +232,7 @@ $(document).ready(function() {
         var shop_left = $shop.css("background-position").split(" ")[0];
 
         var $instructions = $(".instructions");
-        var instructions_start = shop_start + $shop.height();
+        var instructions_start = shop_start + $shop.height() + 100;
 
         var onScroll = _.debounce(function() {
             var scroll_top = $body.scrollTop();
