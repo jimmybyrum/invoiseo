@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="no-js start">
+<html lang="en" class="no-js">
 <head>
 <title>Invoiseo</title>
 <link rel="icon" href="/images/icon-photo-round.png" type="image/png">
@@ -38,6 +38,7 @@
 .text-xl { font-size: 125%; }
 
 .text-bg {
+    position: relative;
     padding: 1em 0;
     background: rgba(255, 255, 255, .9);
 }
@@ -47,6 +48,10 @@
 
 img {
     max-width: 100%;
+}
+
+p:last-child {
+    margin-bottom: 0;
 }
 
 /*.invoice {
@@ -108,6 +113,7 @@ footer {
 }
 
 .invoice {
+    position: fixed;
     margin-top: -200px;
     left: 0;
     right: 0;
@@ -115,23 +121,61 @@ footer {
     z-index: 0;
     overflow: hidden;
 }
+
+@media (max-width: 480px) {
+    .section {
+        padding: 70px 30px;
+    }
+    .invoice {
+        position: relative;
+        margin-top: -50px;
+        height: 150px;
+    }
+    .start {
+        padding-top: 100px;
+    }
+    h1 {
+        font-size: 60px;
+    }
+    .huge {
+        font-size: 40px;
+    }
+    .big {
+        font-size: 30px;
+    }
+    .mall-blur {
+        background-position: 30% 30%;
+    }
+    .shopkeeper {
+        padding-top: 180px;
+        padding-bottom: 180px;
+        background-position: 65% 50%;
+    }
+    .shopkeeper p {
+        bottom: 0;
+    }
+    .instructions {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+}
 </style>
 </head>
 <body>
 
-<div class="section text-center">
+<div class="section start text-center">
     <h1>Invoiseo</h1>
     <p class="big">Turn your invoices into assets.</p>
 </div>
 
-<div class="invoice text-center" data-spy="affix"><img src="/images/invoice1.png" width="200"></div>
+<div class="invoice text-center"><img src="/images/invoice2.png" width="200"></div>
 
 <div class="section text-center mall-blur ha">
     <p class="huge text-light shadow">60% of all in-store purchases start online.</p>
 </div>
 
 <div class="section text-center googlesearch">
-    <p class="big">We make the products you sell searchable in Google.</p>
+    <p class="big text-bg" style="padding: 0 0 10px;">We make the products you sell searchable in Google.</p>
     <img src="/images/googlesearch.png" alt="Google Search">
 </div>
 
@@ -140,11 +184,13 @@ footer {
 </div>
 
 <div class="section instructions">
-    <p class="big">Email your invoices to <a href="mailto:invoice@invoiseo.com">invoice@invoiseo.com</a> to get started.</p>
-    <p class="lead">Don't worry what condition the invoice is in; we accept everything from email forwards of electronic receipts to photos of hard copies. Heck, we'll even take a slip that's been left out in the rain and hardly readable.</p>
+    <div class="text-bg">
+        <p class="big">Email an invoice to <a href="mailto:invoice@invoiseo.com">invoice@invoiseo.com</a> to get started.</p>
+        <p class="lead">Don't worry what condition the invoice is in; we accept everything from email forwards of electronic receipts to photos of hard copies. Heck, we'll even take a slip that's been left out in the rain and hardly readable.</p>
+    </div>
 </div>
 
-<footer>Invoiseo is a project by Jonathan Steiman and James Byrum. &copy; 2014 Invoiseo</footer>
+<footer>Invoiseo is a project by Jonathan Steiman and James Byrum.<br>&copy; 2014 Invoiseo</footer>
 
 <script src="/js/modernizr.js"></script>
 <script src="/js/jquery.min.js"></script>
@@ -196,15 +242,14 @@ $(document).ready(function() {
             //         $invoice.css("background-position", invoice_left + " " + invoice_pos + "%");
             //     }
             // }
-            if (scroll_top > goog_top) {
-                // $body.scrollTop(goog_top);
-            }
             if (scroll_top > instructions_start) {
                 $invoice.height(invoice_height);
             } else if (scroll_top >= search_box) {
                 var diff = Math.round(scroll_top - search_box);
                 var new_height = invoice_height - diff;
                 $invoice.height(new_height);
+            } else {
+                $invoice.height(invoice_height);
             }
             if (scroll_top > shop_start) {
                 shop_pos = (scroll_top - shop_start) / 8;
