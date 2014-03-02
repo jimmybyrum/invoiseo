@@ -235,7 +235,7 @@ $(document).ready(function() {
         var instructions_start = shop_start + $shop.height() + 100;
 
         var onScroll = _.debounce(function() {
-            var scroll_top = $body.scrollTop();
+            var scroll_top = $(document).scrollTop();
             // if (scroll_top > invoice_start) {
             //     invoice_pos = 140 - (scroll_top / 15);
             //     if (invoice_pos <= 140) {
