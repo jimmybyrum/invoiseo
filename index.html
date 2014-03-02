@@ -244,9 +244,9 @@ $(document).ready(function() {
         var shop_left = $shop.css("background-position").split(" ")[0];
 
         var $instructions = $(".instructions");
-        var instructions_start = shop_start + $shop.height() + 100;
+        var instructions_start = shop_start + $shop.height() + 150;
 
-        var onScroll = _.debounce(function() {
+        var onScroll = function() {
             var scroll_top = $(document).scrollTop();
             // if (scroll_top > invoice_start) {
             //     invoice_pos = 140 - (scroll_top / 15);
@@ -276,7 +276,7 @@ $(document).ready(function() {
                 }
             }
 
-        }, 10);
+        };
 
         $(window).on("scroll", onScroll);
     }
