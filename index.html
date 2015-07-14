@@ -54,12 +54,6 @@ p:last-child {
     margin-bottom: 0;
 }
 
-/*.invoice {
-    padding-top: 150px;
-    padding-bottom: 250px;
-    background: url(images/invoice1.png) 50% 140% no-repeat;
-    background-size: 200px;
-}*/
 h1 {
     font-family: 'Advent Pro', sans-serif;
     font-weight: 300;
@@ -223,10 +217,6 @@ $(document).ready(function() {
     if ($body.width() >= 768 && ! Modernizr.touch) {
         var $invoice = $(".invoice");
         var invoice_height = $invoice.height();
-        // var invoice_top = Math.round($invoice.offset().top);
-        // var invoice_start = 0;
-        // var invoice_pos = $invoice.css("background-position").split(" ")[1].replace("%", "");
-        // var invoice_left = $invoice.css("background-position").split(" ")[0];
 
         var $mall = $(".mall-blur");
         var mall_top = Math.round($mall.offset().top);
@@ -252,12 +242,6 @@ $(document).ready(function() {
 
         var onScroll = function() {
             var scroll_top = $(document).scrollTop();
-            // if (scroll_top > invoice_start) {
-            //     invoice_pos = 140 - (scroll_top / 15);
-            //     if (invoice_pos <= 140) {
-            //         $invoice.css("background-position", invoice_left + " " + invoice_pos + "%");
-            //     }
-            // }
             if (scroll_top > instructions_start) {
                 $invoice.height(invoice_height);
             } else if (scroll_top >= search_box) {
@@ -268,19 +252,20 @@ $(document).ready(function() {
                 $invoice.height(invoice_height);
             }
             if (scroll_top > shop_start) {
-                shop_pos = (scroll_top - shop_start) / 8;
+                shop_pos = ((scroll_top - shop_start) / 8).toFixed(2) * 1;
                 if (shop_pos <= 120) {
                     $shop.css("background-position", shop_left + " -" + shop_pos + "px");
                 }
             }
             if (scroll_top > mall_start) {
-                mall_pos = (scroll_top - mall_start) / 15;
+                mall_pos = ((scroll_top - mall_start) / 15).toFixed(2) * 1;
                 if (mall_pos <= 80) {
                     $mall.css("background-position", mall_left + " " + mall_pos + "%");
                 }
             }
 
         };
+        onScroll = _.throttle(onScroll, 50);
 
         $(window).on("scroll", onScroll);
     }
